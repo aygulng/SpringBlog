@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"  
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+<head>
+	<title>Blog Comment Section </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!--	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"  />-->
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+
+</head>
+<body>
+<style>
+	body { background: #f6f6f6; }
+	table, th, td {
+		border: 0px solid black;
+		border-collapse: collapse;
+		padding: 10pt;
+	}
+</style>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+	<a class=" text-dark mr-md-auto " th:inline="text">Добро пожаловать, [[${#httpServletRequest.remoteUser}]]</a>
+	<nav class="my-2 my-md-0 mr-md-3">
+		<a class="p-2 text-dark" href="/api/v2/blogs/">Все посты</a>
+		<a class="p-10 text-dark " 	href="/api/v2/blogs/form/0" >Написать пост</a>
+		<a class="p-2 text-dark " href="/api/v2/blogs/myblogs">Мой блог</a>
+	</nav>
+	<a class="btn btn-outline-primary" th:href="@{/}">Выйти</a>
+</div>
+
+<div class="container">
+
+	<div style= "text-align:center" class="post" th:each = "dto : ${dto}">
+		<h2  style= "text-align:center" th:text="${dto.blog.title}">Title</h2>
+		<p style= "text-align:center" th:text="${dto.blog.details}">body text</p>
+	</div>
+
+	<div class="comments">
+		<!--		<label style="text-align:center">Kомментарий :</label>-->
+		<div  class="comment" th:each = "comment, iterStat: ${dto.commentList}">
+			<h6><mark> <a th:text="${comment.username} "> name</a></mark></h6>
+			<p th:text="${comment.description}">comment</p>
+		</div>
+	</div>
+
+</div>
+<div class ="container" th:each = "dto : ${dto}">
+
+	<form  th:object="${cmt}" th:action="@{/api/v2/blogs/comment}" method="post" >
+		<div class="mb-3">
+			<label for="exampleFormControlTextarea1" class="form-label">Написать комментарий :</label>
+			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="${cmt.description}"></textarea>
+		</div>
+		<input th:type="hidden"  th:field="${cmt.blog_id}" />
+		<input  type="submit" class="btn btn-primary d-md-block" value="Отправить" />
+
+	</form>
+</div>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

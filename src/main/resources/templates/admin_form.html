@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<title>Blog Form</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<style>
+	body { background: #f6f6f6; }
+</style>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+<!--	<form th:action="@{/logout}" method="post">-->
+<!--		<button type="submit" class="btn btn-danger">Выйти</button>-->
+<!--	</form>-->
+	<a class="btn btn-outline-primary" th:href="@{/login}">Выйти</a>
+
+	<nav class="my-2 my-md-10 mr-md-5">
+		<a class="p-2 text-dark" th:href="@{/api/v1/admin/}" >Все посты</a>
+		<a class="p-2 text-dark " th:href="@{/api/v1/admin/form/0}">Написать пост</a>
+		<a class="p-2 text-dark " th:href="@{/api/v1/admin/myblogs}">Мой блог</a>
+		<a th:href="@{/api/v1/admin/blogger}" class="p-2 text-dark ">Все пользователи</a>
+		<a th:href="@{/api/v1/admin/ac/create/form}" class="p-2 text-dark ">Создать аккаунт</a>
+	</nav>
+</div>
+<body>
+	<div class="container">
+
+		<form  th:object="${blog}" th:action="@{../{ctx}(ctx=${ctx})}"
+			  th:method="post">
+			<div style="font-weight: normal; clear: both; display: block; height: 25px;">Название</div>
+
+			<input th:required="true" type="text" th:field="${blog.title}"
+				   class="form-control" placeholder=" " />
+
+			<div class="mb-5">
+				<label for="exampleFormControlTextarea1" class="form-label">Описание</label>
+				<textarea th:required="true" th:field="${blog.details}" class="form-control" id="exampleFormControlTextarea1" rows="7" placeholder="Напишите что-нибудь...">gg</textarea>
+			</div>
+
+			<p style="text-align: center">
+				<input type="submit" class="btn btn-primary" value="Опубликовать"></input></p>
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div style="font-weight: normal; clear: both; display: block; height: 25px;"> Пост ID</div>
+				<input type="hidden" th:readonly="true" th:field="${blog.blog_id}" class="form-control" placeholder="ID" />
+				<div style="font-weight: normal; clear: both; display: block; height: 25px;"></div>
+
+				<input th:readonly="true" type="hidden" th:field="${blog.createat}" class="form-control" placeholder="Create Date " />
+
+				<input th:readonly="true" type="hidden" th:field="${blog.updateat}" class="form-control" placeholder="Update Date" />
+				<input th:readonly="true" type="hidden" th:field="${blog.username}" class="form-control" />
+				<input th:readonly="true" type="hidden" th:field="${blog.isactive}" class="form-control" />
+				<br/>			</div>
+		</form>
+	</div>
+
+</body>
+</html>

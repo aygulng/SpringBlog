@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Account Create Form</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<style>
+	body { background: #f6f6f6; }
+</style>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+	<!--	<form th:action="@{/logout}" method="post">-->
+	<!--		<button type="submit" class="btn btn-danger">Выйти</button>-->
+	<!--	</form>-->
+	<a class="btn btn-outline-primary" th:href="@{/login}">Выйти</a>
+
+	<nav class="my-2 my-md-10 mr-md-5">
+		<a class="p-2 text-dark" th:href="@{/api/v1/admin/}" >Все посты</a>
+		<a class="p-2 text-dark " th:href="@{/api/v1/admin/form/0}">Написать пост</a>
+		<a class="p-2 text-dark " th:href="@{/api/v1/admin/myblogs}">Мой блог</a>
+		<a th:href="@{/api/v1/admin/blogger}" class="p-2 text-dark ">Все пользователи</a>
+		<a th:href="@{/api/v1/admin/ac/create/form}" class="p-2 text-dark ">Создать аккаунт</a>
+	</nav>
+</div>
+<body class="text-center mb-4">
+<!--<br/><br/>-->
+<!--<a th:href="@{/api/v1/admin/}" class="btn btn-danger">Dashboard</a>-->
+<!--	<div class="col-md-4"></div>-->
+<div class="col-3 offset-4">
+	<h1 class="h3 mb-3 font-weight-normal">Создать аккаунт</h1>
+	<p th:if="${sms != null}"> <span style="color:red" id="sms" th:text="${sms}"></span>
+		<form th:object="${bloggerForm}"
+			th:action="@{/api/v1/admin/ac/create}" action="#" method="post">
+			Имя пользователя : <input type="text" th:field="*{username}"
+				class="form-control" placeholder="Имя пользователя" />
+			<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Ошибка</p>
+			<div style="clear: both; display: block; height: 10px;"></div>
+	Пароль : <input type="password" th:field="*{password}"
+				class="form-control" placeholder="Пароль" />
+			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Ошибка</p>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<span> Выбрать роль пользователя</span> <select th:field="*{role}"
+				class="form-control">
+				<option value=""></option>
+				<option th:value="ADMIN" th:text="ADMIN"></option>
+				<option th:value="USER" th:text="USER"></option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<span> Статус аккаунта</span> <select th:field="*{isactive}"
+				class="form-control">
+				<option value=""></option>
+				<option th:value="Y" th:text="Активный"></option>
+				<option th:value="N" th:text="Неактивный"></option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+	<p style="text-align: center">
+			<input   type="submit" class="btn btn-primary" value="Сохранить"></input>
+	</p>
+</form>
+</div>
+</div>
+</body>
+</body>
+</html>

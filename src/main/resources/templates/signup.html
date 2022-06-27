@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Регистрация</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!--	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />-->
+	<!--	<link type="text/css" rel="stylesheet" href="/static/css/signin.css" th:href="@{/css/signin.css}" />-->
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!--	<link rel="stylesheet" th:href="@{/css/main.css}">-->
+
+</head>	<style>
+	body { background: #efefef ; }
+</style>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+	<a class=" text-dark mr-md-auto " th:href="@{/}"> Главная страница</a>
+	<nav class="my-2 my-md-0 mr-md-3">
+		<a class="btn btn-outline-primary "  th:href="@{/login}">Войти</a>
+	</nav>
+</div>
+<body class="text-center mb-4">
+<div class="col-3 offset-4">
+	<h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
+
+<!--	<form th:object="${signupform}" th:action="@{/signup}" action="#" method="post">-->
+
+<!--		<p>-->
+<!--			<label>Имя пользователя :</label><br>-->
+<!--			<input type="text" th:field="*{username}"  class="form-control" placeholder="username" required="" autofocus="">-->
+<!--		</p>-->
+<!--		<div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">-->
+<!--			Ошибка имени пользователя-->
+<!--		</div>-->
+<!--		<p>-->
+<!--			<label>Пароль :</label><br>-->
+<!--			<input type="password" th:field="*{password}" class="form-control" placeholder="12345678" required="" autofocus="">-->
+<!--		</p>-->
+<!--		<div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">-->
+<!--			Ошибка пароля-->
+<!--		</div>-->
+<!--		<p >-->
+<!--			<label>Повторно введите пароль :</label><br>-->
+<!--			<input type="password" th:field="*{password}" class="form-control" placeholder="12345678" required="" autofocus="">-->
+<!--		</p>-->
+<!--		<div class="alert alert-danger" th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">-->
+<!--			Ошибка пароля-->
+<!--		</div>-->
+<!--		<input type="submit" class="btn btn btn-primary btn-block" value="Зарегистрироваться"></input>-->
+<!--		&lt;!&ndash;		<button class=" type="submit">Сохранить</button>&ndash;&gt;-->
+<!--	</form>-->
+
+	<!--			<a th:href="@{/login}" class="btn btn-primary">Войти</a>-->
+
+<!--		<h1>Регистрация</h1>-->
+		<div  class="col-md-20">
+		<br/><br/> <p th:if="${sms != null}"> <span th:text="${sms}"></span> </p>
+			<form class="text-center" th:object="${signupform}" th:action="@{/signup}" action="#" method="post">
+
+				<input type="text" th:field="*{username}" class="form-control"
+					placeholder="Иvя пользователя" />
+				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Ошибка имени пользователя</p>
+				<div class="form-floating" style="clear: both; display: block; height: 10px;"></div>
+
+				<input type="password" th:field="*{password}" class="form-control"
+					placeholder="Пароль" />
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Ошибка пароля</p>
+				<div class="form-floating" style="clear: both; display: block; height: 10px;"></div>
+				<input type="password" th:field="*{passwordCheck}" class="form-control"
+					placeholder="Повторно введите пароль" />
+
+				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Ошибка пароля</p>
+				<input type="hidden" th:field="*{role}" class="form-control"
+					value="a" />
+				<div class="form-floating" style="clear: both; display: block; height: 10px;"></div>
+				<input type="submit" class="btn btn-primary" value="Зарегистрироваться"></input>
+			</form>
+
+<!--			<br/><br/><br/>-->
+<!--			<a th:href="@{/login}" class="btn btn-primary">Войти</a>-->
+		</div>
+
+</div>
+
+
+
+</body>
+</html>

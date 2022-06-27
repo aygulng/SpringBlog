@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />-->
+    <!--     	<link type="text/css" rel="stylesheet" href="/css/signin.css" th:href="@{/css/signin.css}" />-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Вход</title>
+</head>
+
+<style>
+    body { background: #efefef ; }
+</style>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <a class=" text-dark mr-md-auto " th:href="@{/}"> Главная страница</a>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a th:href="@{/signup}" class="btn btn-primary">Регистрация</a>
+    </nav>
+</div>
+<body class="text-center mb-4" >
+<!--    <div  class="col-md-4 col-md-offset-4">-->
+<!--&lt;!&ndash;    <a th:href="@{/}" class="btn btn-primary">Главная страница</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a th:href="@{/signup}" class="btn btn-primary">Регистрация</a> <br/> <br/>&ndash;&gt;-->
+<!--     <h2 class="form-signin-heading"></h2>-->
+<!--        <div class="alert alert-danger" th:if="${param.error}">-->
+<!--            Неверное имя пользователя и пароль.-->
+<!--        </div>-->
+<!--        <div class="alert alert-warning" th:if="${param.logout}">-->
+<!--            Вы вышли из системы.-->
+<!--        </div>-->
+
+<!--        <form th:action="@{/login}" method="post">-->
+<!--            <div><label> Имя пользователя : <input type="text" name="username" class="form-control"/> </label></div>-->
+<!--            <div><label> Пароль : <input type="password" name="password" class="form-control"/> </label></div>-->
+<!--            <div><input type="submit" value="Войти" class="btn btn-primary"/></div>-->
+<!--        </form>-->
+
+<!--        <br/><br/><br/>-->
+<!--    </div>-->
+
+<div class="col-3 offset-4">
+    <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
+
+    <div class="alert alert-danger" th:if="${param.error}">
+        Неверное имя пользователя и пароль.
+    </div>
+    <div class="alert alert-warning" th:if="${param.logout}">
+        Вы вышли из системы.
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <p>
+            <label> Имя пользователя :</label><br>
+            <input type="text" name="username" class="form-control" placeholder="имя" required="" autofocus="">
+        </p>
+        <p>
+            <label> Пароль : </label><br>
+            <input type="password" name="password" class="form-control" placeholder="1234567" required="" autofocus="">
+        </p>
+        <!--        <button class="btn btn-primary btn-block" type="submit">Войти</button>-->
+        <input type="submit" value="Войти" class="btn btn-primary btn-block"/>
+
+    </form>
+
+</div>
+</body>
+</html>
